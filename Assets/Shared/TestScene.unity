@@ -553,7 +553,7 @@ MonoBehaviour:
   StateChanged:
     m_PersistentCalls:
       m_Calls: []
-  CurrentPathNode: {fileID: 0}
+  CurrentPathNode: {fileID: 1713134340}
   PlayerTransform: {fileID: 278515010}
   StartingState: 1
   DetectionRange: 4
@@ -725,6 +725,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536585081}
   m_CullTransparentMesh: 1
+--- !u!114 &1713134340 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 681267852407844876, guid: 07df0d11c74d5284fae086743b584e4d, type: 3}
+  m_PrefabInstance: {fileID: 1768909937}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69a456b9df9fca40ac4e35d54993e9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1768909937
 PrefabInstance:
   m_ObjectHideFlags: 0
