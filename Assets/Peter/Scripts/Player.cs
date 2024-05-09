@@ -6,40 +6,52 @@ public class Player : MonoBehaviour
 {
     public float exp = 0;
     public float level = 1;
-    public float expNeeded = Random.Range(10f, 20f);
+    public float expNeeded = 10;
 
     public float upgradePoints = 0;
     public float levelHealth = 1;
     public float levelEnergy = 1;
-    public float levelDamage = 1;
+    public float levelEnergyRegen = 1;
 
     public float maxHealth = 5;
     public float maxEnergy = 10;
-    public float damage = 1;
+    public float energyRegen = 1;
 
     public void LevelUp()
     {
         level++;
         upgradePoints++;
         exp -= expNeeded;
-        expNeeded = Random.Range(10f, 15f);
+        expNeeded += Random.Range(10f, 15f);
     }
 
     public void HealthUp()
     {
-        maxHealth += 5;
-        upgradePoints--;
+        if (upgradePoints >= 1)
+        {
+            maxHealth += 5;
+            levelHealth++;
+            upgradePoints--;
+        }
     }
 
     public void EnergyUp()
     {
-        maxEnergy += 10;
-        upgradePoints--;
+        if (upgradePoints >= 1)
+        {
+            maxEnergy += 3;
+            levelEnergy++;
+            upgradePoints--;
+        }
     }
 
-    public void DamageUp()
+    public void EnergyRegenUp()
     {
-        damage++;
-        upgradePoints--;
+        if (upgradePoints >= 1)
+        {
+            energyRegen++;
+            levelEnergyRegen++;
+            upgradePoints--;
+        }
     }
 }
