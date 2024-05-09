@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Stats : MonoBehaviour
 {
     public float exp = 0;
     public float level = 1;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     public void HealthUp()
     {
-        if (upgradePoints >= 1)
+        if (upgradePoints >= 1 && levelHealth < 10)
         {
             maxHealth += 5;
             levelHealth++;
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
     public void EnergyUp()
     {
-        if (upgradePoints >= 1)
+        if (upgradePoints >= 1 && levelEnergy < 10)
         {
             maxEnergy += 3;
             levelEnergy++;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     public void EnergyRegenUp()
     {
-        if (upgradePoints >= 1)
+        if (upgradePoints >= 1 && levelEnergyRegen < 10)
         {
             energyRegen++;
             levelEnergyRegen++;
