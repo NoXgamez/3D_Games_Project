@@ -17,6 +17,7 @@ public enum EnemyState
 public class EnemyController : BaseStateMachine
 {
     [Header("Required References")]
+    public GameObject nodePrefab;
     public PathNode CurrentPathNode;
     public Transform PlayerTransform;
 
@@ -28,7 +29,7 @@ public class EnemyController : BaseStateMachine
     [SerializeField] public float AttackTime = 2;
 
     private NavMeshAgent agent;
-   [HideInInspector] public UnityEvent DestinationReached;
+    [HideInInspector] public UnityEvent DestinationReached;
 
     protected override void Awake()
     {
@@ -38,6 +39,10 @@ public class EnemyController : BaseStateMachine
         States.Add((int)EnemyState.Attacking, new AttackingState());
 
         agent = GetComponent<NavMeshAgent>();
+
+        // Create a node on start
+        GameObject node = Instantiate(nodePrefab, transform.position, Quaternion.identity);
+        CurrentPathNode = node.GetComponent<PathNode>();
 
         base.Awake();
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PatrollingState : BaseState
 {
-   EnemyController enemyController;
+    EnemyController enemyController;
     PathNode currentNode;
 
     public override void Enter(BaseStateMachine controller)
