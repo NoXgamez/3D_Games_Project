@@ -37,7 +37,6 @@ public class AttackingState : BaseState
             Vector3 targetPosition = enemyController.transform.position + directionToPlayer * moveDistance;
             enemyController.MoveTo(targetPosition);
 
-
             elapsedTime += Time.deltaTime;
             if (elapsedTime > enemyController.AttackTime)
             {
