@@ -1409,7 +1409,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 020372855cedcfd4eb4d47eee21339f5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 1e92bd07bb4fdde489cc94be23b47c01, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &2012032451
 Transform:
@@ -1644,6 +1644,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 83084485631266617, guid: 14ca230a23cf5fa4caead7b415d2e4bf, type: 3}
+      propertyPath: expText
+      value: 
+      objectReference: {fileID: 2033986295}
+    - target: {fileID: 83084485631266617, guid: 14ca230a23cf5fa4caead7b415d2e4bf, type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 1871864296}
+    - target: {fileID: 83084485631266617, guid: 14ca230a23cf5fa4caead7b415d2e4bf, type: 3}
+      propertyPath: energyText
+      value: 
+      objectReference: {fileID: 737109085}
+    - target: {fileID: 83084485631266617, guid: 14ca230a23cf5fa4caead7b415d2e4bf, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 1546968913}
     - target: {fileID: 7066907400107956492, guid: 14ca230a23cf5fa4caead7b415d2e4bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

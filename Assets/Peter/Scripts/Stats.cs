@@ -16,16 +16,4 @@ public class Stats
     public float maxHealth;
     public float maxEnergy;
     public float energyRegen;
-
-    // Move to player once stats are implemented
-    public void LevelUp()
-    {
-        if (exp >= expNeeded)
-        {
-            level++;
-            upgradePoints++;
-            exp -= expNeeded;
-            expNeeded += Random.Range(10f, 15f);
-        }
-    }
 }
