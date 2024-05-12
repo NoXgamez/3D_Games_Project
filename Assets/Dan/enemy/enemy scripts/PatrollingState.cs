@@ -24,8 +24,10 @@ public class PatrollingState : BaseState
     public override void Update()
     {
         if (enemyController.IsPlayerWithinFollowRange())
+        {
             enemyController.SetState((int)EnemyState.Following);
 
+        }
         base.Update();
     }
 

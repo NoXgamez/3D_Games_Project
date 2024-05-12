@@ -30,7 +30,8 @@ public class EnemyController : BaseStateMachine
 
     private NavMeshAgent agent;
     [HideInInspector] public UnityEvent DestinationReached;
-
+    public Animator animator;
+    
     protected override void Awake()
     {
         States.Add((int)EnemyState.Idle, new IdleState());
@@ -40,6 +41,7 @@ public class EnemyController : BaseStateMachine
 
         agent = GetComponent<NavMeshAgent>();
 
+        animator = GetComponent<Animator>();
         // Create a node on start
         GameObject node = Instantiate(nodePrefab, transform.position, Quaternion.identity);
         CurrentPathNode = node.GetComponent<PathNode>();
@@ -66,11 +68,15 @@ public class EnemyController : BaseStateMachine
 
     public bool IsWithinAttackRange()
     {
+        animator.SetBool("IsAttack", true);
+        animator.SetBool("IsChase", false);
+        animator.SetBool("IsIdle", false);
         return Vector3.Distance(transform.position, PlayerTransform.position) <= AttackRange;
     }
 
     public bool HasLostPlayer()
     {
+
         return Vector3.Distance(transform.position, PlayerTransform.position) >= LoseDetectionRange;
     }
 
@@ -81,11 +87,17 @@ public class EnemyController : BaseStateMachine
 
     public void MoveTo(Vector3 position)
     {
+        animator.SetBool("IsAttack", false);
+        animator.SetBool("IsChase", true);
+        animator.SetBool("IsIdle", false);
         agent.SetDestination(position);
     }
 
     public void MoveTo(GameObject target)
     {
+        animator.SetBool("IsAttack", false);
+        animator.SetBool("IsChase", true);
+        animator.SetBool("IsIdle", false);
         agent.SetDestination(target.transform.position);
     }
 
