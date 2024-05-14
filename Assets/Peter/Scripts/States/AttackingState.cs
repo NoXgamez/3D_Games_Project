@@ -28,6 +28,13 @@ public class AttackingState : BaseState
             enemyController.SetState((int)EnemyState.Patrolling);
         else
         {
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime > enemyController.AttackTime)
+            {
+                Attack();
+                elapsedTime = 0;
+            }
+
             Vector3 playerPosition = enemyController.PlayerTransform.position;
             Vector3 directionToPlayer = (playerPosition - enemyController.transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(playerPosition, enemyController.transform.position);
@@ -36,13 +43,6 @@ public class AttackingState : BaseState
 
             Vector3 targetPosition = enemyController.transform.position + directionToPlayer * moveDistance;
             enemyController.MoveTo(targetPosition);
-
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime > enemyController.AttackTime)
-            {
-                Attack();
-                elapsedTime = 0;
-            }
         }
 
         base.Update();
