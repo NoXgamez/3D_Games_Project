@@ -23,7 +23,7 @@ public class PlayerInteraction : MonoBehaviour
         PerformRayCast();
     }
 
-    private void PerformRayCast()
+    public void PerformRayCast()
     {
         if (Physics.Raycast(
             playerCamera.transform.position,

@@ -45,6 +45,11 @@ public class Player : MonoBehaviour
         {
             LevelUp();
         }
+
+        if (energy < maxEnergy)
+        {
+            energy += energyRegen * Time.deltaTime;
+        }
     }
 
     public void LevelUp()
@@ -69,5 +74,15 @@ public class Player : MonoBehaviour
             energyRegen = energyRegen
         };
         GameUtilities.Save<Stats>(newStats, $"{Application.dataPath}/StatData.json");
+    }
+
+    public void GetHit()
+    {
+        health -= 1f;
+    }
+
+    public void DrainEnergy()
+    {
+        energy -= 5f;
     }
 }

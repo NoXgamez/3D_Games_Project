@@ -31,9 +31,9 @@ public class StatComponent : MonoBehaviour
                 levelHealth = 1,
                 levelEnergy = 1,
                 levelEnergyRegen = 1,
-                maxHealth = 5,
-                maxEnergy = 10,
-                energyRegen = 4
+                maxHealth = 3,
+                maxEnergy = 5,
+                energyRegen = 1
             };
 
             GameUtilities.Save<Stats>(Data, path);

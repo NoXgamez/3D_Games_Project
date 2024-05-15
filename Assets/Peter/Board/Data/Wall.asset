@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66d6dade0aafd9245ae9f5249141659a, type: 3}
+  m_Script: {fileID: 11500000, guid: bf1e0bcc88ec57e4caa4975c8fbbace7, type: 3}
   m_Name: Wall
   m_EditorClassIdentifier: 
   ID: Wall

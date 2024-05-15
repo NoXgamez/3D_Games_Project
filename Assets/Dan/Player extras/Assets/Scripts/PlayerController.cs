@@ -5,25 +5,26 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    PlayerInput playerInput;
-    PlayerInput.MainActions input;
+    //PlayerInput playerInput;
+    //PlayerInput.MainActions input;
 
     CharacterController controller;
     Animator animator;
     AudioSource audioSource;
+    public Player player;
 
-    [Header("Controller")]
-    public float moveSpeed = 5;
-    public float gravity = -9.8f;
-    public float jumpHeight = 1.2f;
+    //[Header("Controller")]
+    //public float moveSpeed = 5;
+    //public float gravity = -9.8f;
+    //public float jumpHeight = 1.2f;
 
     Vector3 _PlayerVelocity;
 
-    bool isGrounded;
+    //bool isGrounded;
 
-    [Header("Camera")]
+    //[Header("Camera")]
     public Camera cam;
-    public float sensitivity;
+    //public float sensitivity;
 
     float xRotation = 0f;
 
@@ -33,8 +34,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
 
-        playerInput = new PlayerInput();
-        input = playerInput.Main;
+        //playerInput = new PlayerInput();
+        //input = playerInput.Main;
         AssignInputs();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -43,65 +44,65 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        isGrounded = controller.isGrounded;
+        //isGrounded = controller.isGrounded;
 
         // Repeat Inputs
-        if(input.Attack.IsPressed())
-        { Attack(); }
+        //if(input.Attack.IsPressed())
+        //{ Attack(); }
 
         SetAnimations();
     }
 
-    void FixedUpdate() 
-    { MoveInput(input.Movement.ReadValue<Vector2>()); }
+    //void FixedUpdate() 
+    //{ MoveInput(input.Movement.ReadValue<Vector2>()); }
 
-    void LateUpdate() 
-    { LookInput(input.Look.ReadValue<Vector2>()); }
+    //void LateUpdate() 
+    //{ LookInput(input.Look.ReadValue<Vector2>()); }
 
-    void MoveInput(Vector2 input)
-    {
-        Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
+    //void MoveInput(Vector2 input)
+    //{
+    //    Vector3 moveDirection = Vector3.zero;
+    //    moveDirection.x = input.x;
+    //    moveDirection.z = input.y;
 
-        controller.Move(transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
-        _PlayerVelocity.y += gravity * Time.deltaTime;
-        if(isGrounded && _PlayerVelocity.y < 0)
-            _PlayerVelocity.y = -2f;
-        controller.Move(_PlayerVelocity * Time.deltaTime);
-    }
+    //    controller.Move(transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
+    //    _PlayerVelocity.y += gravity * Time.deltaTime;
+    //    if(isGrounded && _PlayerVelocity.y < 0)
+    //        _PlayerVelocity.y = -2f;
+    //    controller.Move(_PlayerVelocity * Time.deltaTime);
+    //}
 
-    void LookInput(Vector3 input)
-    {
-        float mouseX = input.x;
-        float mouseY = input.y;
+    //void LookInput(Vector3 input)
+    //{
+    //    float mouseX = input.x;
+    //    float mouseY = input.y;
 
-        xRotation -= (mouseY * Time.deltaTime * sensitivity);
-        xRotation = Mathf.Clamp(xRotation, -80, 80);
+    //    xRotation -= (mouseY * Time.deltaTime * sensitivity);
+    //    xRotation = Mathf.Clamp(xRotation, -80, 80);
 
-        cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+    //    cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime * sensitivity));
-    }
+    //    transform.Rotate(Vector3.up * (mouseX * Time.deltaTime * sensitivity));
+    //}
 
-    void OnEnable() 
-    { input.Enable(); }
+    //void OnEnable() 
+    //{ input.Enable(); }
 
-    void OnDisable()
-    { input.Disable(); }
+    //void OnDisable()
+    //{ input.Disable(); }
 
-    void Jump()
-    {
-        // Adds force to the player rigidbody to jump
-        if (isGrounded)
-            _PlayerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-    }
+    //void Jump()
+    //{
+    //    // Adds force to the player rigidbody to jump
+    //    if (isGrounded)
+    //        _PlayerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+    //}
 
     void AssignInputs()
     {
-        input.Jump.performed += ctx => Jump();
-        input.Attack.started += ctx => Attack();
-        input.Attack2.started += ctx => Attack2();
+        ////input.Jump.performed += ctx => Jump();
+        //input.Attack.started += ctx => Attack();
+        //input.Attack2.started += ctx => Attack2();
     }
 
     // ---------- //
@@ -161,7 +162,7 @@ public class PlayerController : MonoBehaviour
     bool readyToAttack = true;
     int attackCount;
 
-    public void Attack()
+    public void OnAttack()
     {
         if(!readyToAttack || attacking) return;
 
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
         attacking = true;
 
         Invoke(nameof(ResetAttack), attackSpeed);
-        Invoke(nameof(AttackRaycast), attackDelay);
+        Invoke(nameof(PlayerInteraction.PerformRayCast), attackDelay);
 
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.PlayOneShot(swordSwing);
@@ -185,42 +186,47 @@ public class PlayerController : MonoBehaviour
             attackCount = 0;
         }
     }
-    public void Attack2()
+    public void OnAttack2()
     {
-        if (!readyToAttack || attacking) return;
-
-        readyToAttack = false;
-        attacking = true;
-
-        Invoke(nameof(ResetAttack), attackSpeed);
-        Invoke(nameof(AttackRaycast), attackDelay);
-
-        audioSource.pitch = Random.Range(0.9f, 1.1f);
-        audioSource.PlayOneShot(gunShot);
-
-        if (attackCount == 0)
+        if(player.energy >= 5)
         {
-            ChangeAnimationState(ATTACK3);
-            attackCount++;
+            if (!readyToAttack || attacking) return;
+
+            readyToAttack = false;
+            attacking = true;
+
+            Invoke(nameof(ResetAttack), attackSpeed);
+            Invoke(nameof(PlayerInteraction.PerformRayCast), attackDelay);
+
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(gunShot);
+
+            if (attackCount == 0)
+            {
+                ChangeAnimationState(ATTACK3);
+                attackCount++;
+            }
+
+            player.DrainEnergy();
         }
-      
     }
+
     void ResetAttack()
     {
         attacking = false;
         readyToAttack = true;
     }
 
-    void AttackRaycast()
-    {
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
-        { 
-            HitTarget(hit.point);
+    //void AttackRaycast()
+    //{
+    //    if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+    //    { 
+    //        HitTarget(hit.point);
 
-            if(hit.transform.TryGetComponent<Actor>(out Actor T))
-            { T.TakeDamage(attackDamage); }
-        } 
-    }
+    //        if(hit.transform.TryGetComponent<Actor>(out Actor T))
+    //        { T.TakeDamage(attackDamage); }
+    //    } 
+    //}
 
     void HitTarget(Vector3 pos)
     {

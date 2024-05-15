@@ -56,13 +56,11 @@ public class PlayerLocomotion : MonoBehaviour
         {
             currentVelocity.y += jumpHeight;
         }
-
     }
 
     public void OnMove(InputValue inputValue)
     {
         movementInput = inputValue.Get<Vector2>();
-
     }
 
     public void OnLook(InputValue inputValue)
