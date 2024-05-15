@@ -71,6 +71,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""18337816-dcb9-4e12-9768-869439c68fe4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Attack2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f81640bf-2224-4be5-bfee-d8c1f0ab257a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -191,6 +211,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Main_Look = m_Main.FindAction("Look", throwIfNotFound: true);
         m_Main_Attack = m_Main.FindAction("Attack", throwIfNotFound: true);
         m_Main_Attack2 = m_Main.FindAction("Attack2", throwIfNotFound: true);
+        m_Main_Interact = m_Main.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -257,6 +278,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Main_Look;
     private readonly InputAction m_Main_Attack;
     private readonly InputAction m_Main_Attack2;
+    private readonly InputAction m_Main_Interact;
     public struct MainActions
     {
         private @PlayerInput m_Wrapper;
@@ -266,6 +288,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Main_Look;
         public InputAction @Attack => m_Wrapper.m_Main_Attack;
         public InputAction @Attack2 => m_Wrapper.m_Main_Attack2;
+        public InputAction @Interact => m_Wrapper.m_Main_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -290,6 +313,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack2.started += instance.OnAttack2;
             @Attack2.performed += instance.OnAttack2;
             @Attack2.canceled += instance.OnAttack2;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IMainActions instance)
@@ -309,6 +335,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Attack2.started -= instance.OnAttack2;
             @Attack2.performed -= instance.OnAttack2;
             @Attack2.canceled -= instance.OnAttack2;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IMainActions instance)
@@ -342,5 +371,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnAttack2(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
