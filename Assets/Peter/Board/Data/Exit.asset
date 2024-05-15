@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66d6dade0aafd9245ae9f5249141659a, type: 3}
+  m_Name: Exit
+  m_EditorClassIdentifier: 
+  ID: Exit
+  Prefab: {fileID: 919132149155446097, guid: a0602c3fb5ac75c4a8a7af550681429b, type: 3}
