@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public Animator animator;
+    public GameObject hitbox;
 
-    private void Update()
+    public void SpawnHitbox()
     {
-        
+        // Activate the hitbox GameObject
+        hitbox.SetActive(true);
+
+    }
+    public void DespawnHitbox()
+    {
+        hitbox.SetActive(false);
     }
 }

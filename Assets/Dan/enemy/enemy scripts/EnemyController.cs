@@ -103,6 +103,9 @@ public class EnemyController : BaseStateMachine
 
     private bool HasReachedDestination()
     {
+        animator.SetBool("IsAttack", false);
+        animator.SetBool("IsChase", false);
+        animator.SetBool("IsIdle", true);
         return agent.remainingDistance <= agent.stoppingDistance;
     }
 

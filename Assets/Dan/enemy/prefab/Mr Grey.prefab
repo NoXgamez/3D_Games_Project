@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8f9d1aa93721a4fb353f4b58f26db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  hitbox: {fileID: 0}
 --- !u!1001 &5475826809691738513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.99
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -181,10 +181,45 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 400042, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3411420629726282092}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100030, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2276080501409498955}
   m_SourcePrefab: {fileID: 100100000, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
 --- !u!4 &5475826809691605819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400042, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
   m_PrefabInstance: {fileID: 5475826809691738513}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5475826809691772719 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100030, guid: 647a098ac19a9504ea02872319c753d7, type: 3}
+  m_PrefabInstance: {fileID: 5475826809691738513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2276080501409498955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5475826809691772719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e62a34a568f2a4985e0418d4c6753d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  nodePrefab: {fileID: 0}
+  CurrentPathNode: {fileID: 0}
+  PlayerTransform: {fileID: 0}
+  StartingState: 0
+  DetectionRange: 4
+  LoseDetectionRange: 6
+  AttackRange: 2.5
+  AttackTime: 2
+  DestinationReached:
+    m_PersistentCalls:
+      m_Calls: []
+  animator: {fileID: 0}
