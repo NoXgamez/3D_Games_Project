@@ -90,10 +90,10 @@ public class PlayerController : MonoBehaviour
     {
         lookInput = inputValue.Get<Vector2>() * lookSensitivity;
 
-        xRotation += lookInput.y;
+        xRotation += lookInput.y * lookSensitivity;
         xRotation = Mathf.Clamp(xRotation, -verticalLookLimit, verticalLookLimit);
 
-        yRotation += lookInput.x;
+        yRotation += lookInput.x * lookSensitivity;
 
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         transform.rotation = Quaternion.Euler(0, yRotation, 0);
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
         //playerInput = new PlayerInput();
         //input = playerInput.Main;
-        AssignInputs();
+        //AssignInputs();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -171,12 +171,12 @@ public class PlayerController : MonoBehaviour
     //        _PlayerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
     //}
 
-    void AssignInputs()
-    {
-        ////input.Jump.performed += ctx => Jump();
-        //input.Attack.started += ctx => Attack();
-        //input.Attack2.started += ctx => Attack2();
-    }
+    //void AssignInputs()
+    //{
+    //    ////input.Jump.performed += ctx => Jump();
+    //    //input.Attack.started += ctx => Attack();
+    //    //input.Attack2.started += ctx => Attack2();
+    //}
 
     // ---------- //
     // ANIMATIONS //
