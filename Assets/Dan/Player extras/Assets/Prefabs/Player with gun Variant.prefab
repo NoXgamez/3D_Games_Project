@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5597318372559880915}
+    - target: {fileID: 481995042327841608, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
+      propertyPath: attackLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564116, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_Name
       value: Player with gun Variant
@@ -26,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -145,6 +149,8 @@ MonoBehaviour:
   healthText: {fileID: 0}
   energyText: {fileID: 0}
   expText: {fileID: 0}
+  swordDamage: 1
+  gunDamage: 2
 --- !u!114 &4772168405946036174
 MonoBehaviour:
   m_ObjectHideFlags: 0
