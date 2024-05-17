@@ -13,7 +13,7 @@ public class AttackingState : BaseState
 
         if (enemyController != null)
         {
-            enemyController.MoveTo(enemyController.PlayerTransform.position);
+            enemyController.MoveTo(enemyController.Player.transform.position);
             enemyController.StartMoving();
         }
 
@@ -28,14 +28,16 @@ public class AttackingState : BaseState
             enemyController.SetState((int)EnemyState.Patrolling);
         else
         {
-            Vector3 playerPosition = enemyController.PlayerTransform.position;
-            Vector3 directionToPlayer = (playerPosition - enemyController.transform.position).normalized;
-            float distanceToPlayer = Vector3.Distance(playerPosition, enemyController.transform.position);
-            float stoppingDistance = 1.5f; // Distance to stop from the player (adjust as needed)
-            float moveDistance = Mathf.Max(distanceToPlayer - stoppingDistance, 0); // Ensure moveDistance is not negative
+            //Vector3 playerPosition = enemyController.Player.transform.position;
+            //Vector3 directionToPlayer = (playerPosition - enemyController.transform.position).normalized;
+            //float distanceToPlayer = Vector3.Distance(playerPosition, enemyController.transform.position);
+            //float stoppingDistance = 5f; // Distance to stop from the player (adjust as needed)
+            //float moveDistance = Mathf.Max(distanceToPlayer - stoppingDistance, 0); // Ensure moveDistance is not negative
 
-            Vector3 targetPosition = enemyController.transform.position + directionToPlayer * moveDistance;
-            enemyController.MoveTo(targetPosition);
+            //Vector3 targetPosition = enemyController.transform.position + directionToPlayer * moveDistance;
+            //enemyController.MoveTo(targetPosition);
+
+            enemyController.StopMoving();
 
             elapsedTime += Time.deltaTime;
             if (elapsedTime > enemyController.AttackTime)
@@ -59,6 +61,8 @@ public class AttackingState : BaseState
 
     public void Attack()
     {
-        Debug.Log("Attack!");
+        enemyController.animator.SetBool("IsAttack", true);
+        enemyController.animator.SetBool("IsChase", false);
+        enemyController.animator.SetBool("IsIdle", false);
     }
 }

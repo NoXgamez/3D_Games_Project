@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Exit
   m_EditorClassIdentifier: 
   ID: Exit
-  Prefab: {fileID: 919132149155446097, guid: a0602c3fb5ac75c4a8a7af550681429b, type: 3}
+  Prefab: {fileID: 2860716775231733784, guid: 4ee806ce1a11e45438fcb00d1057d476, type: 3}

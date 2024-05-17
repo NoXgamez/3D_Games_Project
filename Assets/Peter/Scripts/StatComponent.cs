@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class StatComponent : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class StatComponent : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         if (File.Exists(path))
         {
             Data = GameUtilities.Load<Stats>(path);
@@ -88,5 +91,10 @@ public class StatComponent : MonoBehaviour
 
             GameUtilities.Save<Stats>(Data, path);
         }
+    }
+
+    public void ChangeScene()
+    {
+            SceneManager.LoadScene("MainGameScene");
     }
 }

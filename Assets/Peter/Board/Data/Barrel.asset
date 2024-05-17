@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Barrel
   m_EditorClassIdentifier: 
   ID: Barrel
-  Prefab: {fileID: 919132149155446097, guid: 755cd8f51dcbc2d4fb5669b07330154d, type: 3}
+  Prefab: {fileID: 6846524870685824747, guid: b6fcd24b258a40a4285ef14840107784, type: 3}

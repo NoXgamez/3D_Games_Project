@@ -9,12 +9,14 @@ public class EnemyAttack : MonoBehaviour
 
     public void SpawnHitbox()
     {
+        Debug.Log("hitbox");
         // Activate the hitbox GameObject
         hitbox.SetActive(true);
 
     }
     public void DespawnHitbox()
     {
+        GetComponentInChildren<EnemyAttack>();
         hitbox.SetActive(false);
     }
 }

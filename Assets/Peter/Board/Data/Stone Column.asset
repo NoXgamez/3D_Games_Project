@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Stone Column
   m_EditorClassIdentifier: 
   ID: Stone Column
-  Prefab: {fileID: 919132149155446097, guid: 684e59681bc7d2947a6cb45352a4b0bc, type: 3}
+  Prefab: {fileID: 5086676265105271616, guid: 05aed1a221aa37b48974ac5d77c0ffde, type: 3}

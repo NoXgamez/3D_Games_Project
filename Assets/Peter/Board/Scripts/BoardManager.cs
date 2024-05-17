@@ -13,12 +13,35 @@ public class BoardManager : MonoBehaviour
 	public BoardPieceData[] wallTiles;//Array of wall prefabs.                            
 	public BoardPieceData[] outerWallTiles;//Array of outer tile prefabs.
 
+	EnemyCount enemyCount;
+	public GameObject enemy;
+
 	private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
 	private List<Vector3> gridPositions = new List<Vector3>();  //A list of possible locations to place tiles.
 
     private void Start()
     {
+		enemyCount = GetComponent<EnemyCount>();
         SetupScene();
+    }
+
+    private void Update()
+    {
+        enemyCount.Current = CheckEnemyCount();
+
+        if (enemyCount.Current <= 0 && GameObject.FindGameObjectsWithTag("Exit").Length < 1)
+        {
+            //Instantiate the exit tile in the middle of the board
+            Instantiate(exit.Prefab, new Vector3(columns / 2, 0f, rows / 2), Quaternion.identity);
+        }
+    }
+
+    private int CheckEnemyCount()
+    {
+		int count = 0;
+        foreach (GameObject gameObject in GameObject.FindGameObjectsWithTag("Enemy"))
+            count++;
+		return count;
     }
 
     //Clears our list gridPositions and prepares it to generate a new board.
@@ -110,9 +133,9 @@ public class BoardManager : MonoBehaviour
 
 	//SetupScene initializes our level and calls the previous functions to lay out the game board
 	public void SetupScene()
-	{
-		//Creates the outer walls and floor.
-		BoardSetup();
+    {
+        //Creates the outer walls and floor.
+        BoardSetup();
 
 		//Reset our list of gridpositions.
 		InitialiseList();
@@ -120,8 +143,20 @@ public class BoardManager : MonoBehaviour
 		//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 		LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
 
-		//Instantiate the exit tile in the middle of the board
-		Instantiate(exit.Prefab, new Vector3(columns /2, 0f, rows /2), Quaternion.identity);
+		AddEnemy();
+	}
+
+	private void AddEnemy()
+	{
+		int objectCount = Random.Range(enemyCount.Minimum, enemyCount.Maximum + 1);
+		enemyCount.Current = objectCount;
+
+		for (int i = 0;i < objectCount;i++)
+		{
+			Vector3 randomPosition = RandomPosition();
+
+			GameObject instance = Instantiate(enemy, randomPosition, Quaternion.identity);
+		}
 	}
 }
 

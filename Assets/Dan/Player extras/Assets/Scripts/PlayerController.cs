@@ -315,17 +315,13 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
-            Debug.Log("Raycast");
             HitTarget(hit.point);
-            Debug.Log("hitpoint");
             if (hit.collider.CompareTag("Enemy"))
             {
                 EnemyController enemy = hit.collider.GetComponent<EnemyController>();
-                Debug.Log("hit");
                 // Check if the enemy component exists on the hit object
                 if (enemy != null)
                 {
-                    Debug.Log("exists");
                     // Apply damage to the enemy
                     enemy.TakeDamage(attackDamage);
                 }

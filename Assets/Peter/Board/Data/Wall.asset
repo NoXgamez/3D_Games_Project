@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   ID: Wall
-  Prefab: {fileID: 919132149155446097, guid: 3d09f241a04c3334089d2ba306921456, type: 3}
+  Prefab: {fileID: 215059383406256794, guid: af2b5384849cea246994cd68cb9f19f5, type: 3}

@@ -114954,7 +114954,7 @@ AnimationClip:
   - time: 0
     functionName: SpawnHitbox
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 3d8f9d1aa93721a4fb353f4b58f26db2, type: 3}
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

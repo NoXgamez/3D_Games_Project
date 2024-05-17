@@ -12,7 +12,7 @@ public class FollowingState : BaseState
         if (enemyController != null )
         {
             enemyController.DestinationReached.AddListener(OnReachedDestination);
-            enemyController.MoveTo(enemyController.PlayerTransform.position);
+            enemyController.MoveTo(enemyController.Player.transform.position);
             enemyController.StartMoving();
         }
 
@@ -24,7 +24,7 @@ public class FollowingState : BaseState
         if (enemyController.IsWithinAttackRange())
             enemyController.SetState((int)EnemyState.Attacking);
         else if (!enemyController.HasLostPlayer())
-            enemyController.MoveTo(enemyController.PlayerTransform.position);
+            enemyController.MoveTo(enemyController.Player.transform.position);
         else if (enemyController.HasLostPlayer())
             enemyController.SetState((int)EnemyState.Patrolling);
 

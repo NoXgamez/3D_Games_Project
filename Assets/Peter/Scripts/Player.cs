@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -40,8 +41,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         levelText.text = "LV " + level.ToString();
-        healthText.text = "HP " + health.ToString() + "/" + maxHealth.ToString();
-        expText.text = "XP " + exp.ToString() + "/" + expNeeded.ToString();
+        healthText.text = "HP " + ((int)health).ToString() + "/" + maxHealth.ToString();
+        expText.text = "XP " + ((int)exp).ToString() + "/" + ((int)expNeeded).ToString();
 
         if (exp >= expNeeded)
         {
@@ -55,14 +56,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void gainExp(float amount)
+    public void GainExp(float amount)
     {
         exp += amount;
+
+        Stats newStats = new Stats()
+        {
+            exp = exp,
+            expNeeded = expNeeded,
+            level = level,
+            upgradePoints = statPoints,
+            levelHealth = stats.levelHealth,
+            levelEnergy = stats.levelEnergy,
+            levelEnergyRegen = stats.levelEnergyRegen,
+            maxHealth = maxHealth,
+            maxEnergy = maxEnergy,
+            energyRegen = energyRegen
+        };
+        GameUtilities.Save<Stats>(newStats, $"{Application.dataPath}/StatData.json");
     }
 
     public void LevelUp()
     {
-        
         level++;
         statPoints++;
         exp -= expNeeded;

@@ -227,9 +227,9 @@ MonoBehaviour:
       m_Calls: []
   nodePrefab: {fileID: 2446107571712448312, guid: f604d83397a38dc4e970cd868b02671a, type: 3}
   CurrentPathNode: {fileID: 0}
-  PlayerTransform: {fileID: 0}
+  Player: {fileID: 0}
   health: 2
-  StartingState: 0
+  StartingState: 3
   DetectionRange: 4
   LoseDetectionRange: 6
   AttackRange: 2.5
@@ -238,6 +238,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   animator: {fileID: 0}
+  hitbox: {fileID: 2067794246748397492}
 --- !u!195 &2781193936007398172
 NavMeshAgent:
   m_ObjectHideFlags: 0

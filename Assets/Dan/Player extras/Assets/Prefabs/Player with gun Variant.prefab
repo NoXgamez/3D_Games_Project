@@ -20,21 +20,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player with gun Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1788623314744564116, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6849715
+      value: 1.8697675
       objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.09
+      value: 0.07999897
       objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.80762076
+      value: 3.82
       objectReference: {fileID: 0}
     - target: {fileID: 1788623314744564119, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: m_LocalRotation.w

@@ -19,7 +19,7 @@ public class EnemyController : BaseStateMachine
     [Header("Required References")]
     public GameObject nodePrefab;
     public PathNode CurrentPathNode;
-    public Transform PlayerTransform;
+    public GameObject Player;
 
     public float health = 2;
 
@@ -48,6 +48,8 @@ public class EnemyController : BaseStateMachine
         GameObject node = Instantiate(nodePrefab, transform.position, Quaternion.identity);
         CurrentPathNode = node.GetComponent<PathNode>();
 
+        Player = GameObject.FindGameObjectWithTag("Player");
+
         base.Awake();
     }
 
@@ -70,37 +72,35 @@ public class EnemyController : BaseStateMachine
 
     public bool IsWithinAttackRange()
     {
-        animator.SetBool("IsAttack", true);
-        animator.SetBool("IsChase", false);
-        animator.SetBool("IsIdle", false);
-        return Vector3.Distance(transform.position, PlayerTransform.position) <= AttackRange;
+       
+        return Vector3.Distance(transform.position, Player.transform.position) <= AttackRange;
     }
 
     public bool HasLostPlayer()
     {
 
-        return Vector3.Distance(transform.position, PlayerTransform.position) >= LoseDetectionRange;
+        return Vector3.Distance(transform.position, Player.transform.position) >= LoseDetectionRange;
     }
 
     public bool IsPlayerWithinFollowRange()
     {
-        return Vector3.Distance(transform.position, PlayerTransform.position) <= DetectionRange;
+        return Vector3.Distance(transform.position, Player.transform.position) <= DetectionRange;
     }
 
     public void MoveTo(Vector3 position)
     {
+        agent.SetDestination(position);
         animator.SetBool("IsAttack", false);
         animator.SetBool("IsChase", true);
         animator.SetBool("IsIdle", false);
-        agent.SetDestination(position);
     }
 
     public void MoveTo(GameObject target)
     {
+        agent.SetDestination(target.transform.position);
         animator.SetBool("IsAttack", false);
         animator.SetBool("IsChase", true);
         animator.SetBool("IsIdle", false);
-        agent.SetDestination(target.transform.position);
     }
 
     private bool HasReachedDestination()
@@ -131,9 +131,24 @@ public class EnemyController : BaseStateMachine
 
     void Death()
     {
-        //TryGetComponent<Player>(out Player T);
-        //T.gainExp(UnityEngine.Random.Range(3, 5));
+        Player.TryGetComponent<Player>(out Player T);
+        T.GainExp(UnityEngine.Random.Range(3f, 5f));
         Destroy(gameObject);
+    }
+
+    public GameObject hitbox;
+
+    public void SpawnHitbox()
+    {
+        Debug.Log("hitbox");
+        // Activate the hitbox GameObject
+        hitbox.SetActive(true);
+
+    }
+    public void DespawnHitbox()
+    {
+        GetComponentInChildren<EnemyAttack>();
+        hitbox.SetActive(false);
     }
 
     private void OnDrawGizmos()
