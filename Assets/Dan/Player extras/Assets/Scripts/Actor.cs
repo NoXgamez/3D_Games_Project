@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    int currentHealth;
+    float currentHealth;
     public int maxHealth;
 
     void Awake()
@@ -12,7 +12,7 @@ public class Actor : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         currentHealth -= amount;
 

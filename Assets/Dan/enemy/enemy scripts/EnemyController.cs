@@ -21,6 +21,8 @@ public class EnemyController : BaseStateMachine
     public PathNode CurrentPathNode;
     public Transform PlayerTransform;
 
+    public float health = 2;
+
     [Header("Properties")]
     [SerializeField] private EnemyState StartingState = EnemyState.Idle;
     [SerializeField] private float DetectionRange = 4;
@@ -117,6 +119,21 @@ public class EnemyController : BaseStateMachine
     public void StopMoving()
     {
         agent.isStopped = true;
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        { Death(); }
+    }
+
+    void Death()
+    {
+        //TryGetComponent<Player>(out Player T);
+        //T.gainExp(UnityEngine.Random.Range(3, 5));
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

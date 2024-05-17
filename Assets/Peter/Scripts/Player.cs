@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     public TMPro.TMP_Text energyText;
     public TMPro.TMP_Text expText;
 
+    public float swordDamage = 1;
+    public float gunDamage = 2;
+
     void Start()
     {
         maxHealth = stats.maxHealth;
@@ -38,7 +41,6 @@ public class Player : MonoBehaviour
     {
         levelText.text = "LV " + level.ToString();
         healthText.text = "HP " + health.ToString() + "/" + maxHealth.ToString();
-        energyText.text = "ENERGY " + energy.ToString() + "/" + maxEnergy.ToString();
         expText.text = "XP " + exp.ToString() + "/" + expNeeded.ToString();
 
         if (exp >= expNeeded)
@@ -49,7 +51,13 @@ public class Player : MonoBehaviour
         if (energy < maxEnergy)
         {
             energy += energyRegen * Time.deltaTime;
+            energyText.text = "ENERGY " + ((int)energy).ToString() + "/" + maxEnergy.ToString();
         }
+    }
+
+    public void gainExp(float amount)
+    {
+        exp += amount;
     }
 
     public void LevelUp()

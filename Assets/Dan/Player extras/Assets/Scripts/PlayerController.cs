@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 
 public class PlayerController : MonoBehaviour
 {
@@ -216,15 +217,14 @@ public class PlayerController : MonoBehaviour
     // ------------------- //
 
     [Header("Attacking")]
-    public float attackDistance = 3f;
+    public float attackDistance = 20f;
     public float attackDelay = 0.4f;
     public float attackSpeed = 1f;
-    public int attackDamage = 1;
-    public LayerMask attackLayer;
+    public float attackDamage;
+    //public LayerMask attackLayer;
     public float attackDistance2 = 20f;
     public float attackDelay2 = 1f;
     public float attackSpeed2 = .5f;
-    public int attackDamage2 = 1;
     public GameObject hitEffect;
     public AudioClip swordSwing;
     public AudioClip hitSound;
@@ -241,9 +241,10 @@ public class PlayerController : MonoBehaviour
 
         readyToAttack = false;
         attacking = true;
+        attackDamage = player.swordDamage;
 
         Invoke(nameof(ResetAttack), attackSpeed);
-        Invoke(nameof(PlayerInteraction.PerformRayCast), attackDelay);
+        Invoke(nameof(AttackRaycast), attackDelay);
 
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.PlayOneShot(swordSwing);
@@ -267,9 +268,10 @@ public class PlayerController : MonoBehaviour
 
             readyToAttack = false;
             attacking = true;
+            attackDamage = player.gunDamage;
 
             Invoke(nameof(ResetAttack), attackSpeed);
-            Invoke(nameof(PlayerInteraction.PerformRayCast), attackDelay);
+            Invoke(nameof(AttackRaycast), attackDelay);
 
             audioSource.pitch = Random.Range(0.9f, 1.1f);
             audioSource.PlayOneShot(gunShot);
@@ -290,16 +292,26 @@ public class PlayerController : MonoBehaviour
         readyToAttack = true;
     }
 
-    //void AttackRaycast()
-    //{
-    //    if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
-    //    { 
-    //        HitTarget(hit.point);
+    void AttackRaycast()
+    {
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance))
+        {
+            HitTarget(hit.point);
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                EnemyController enemy = hit.collider.GetComponent<EnemyController>();
 
-    //        if(hit.transform.TryGetComponent<Actor>(out Actor T))
-    //        { T.TakeDamage(attackDamage); }
-    //    } 
-    //}
+                // Check if the enemy component exists on the hit object
+                if (enemy != null)
+                {
+                    // Apply damage to the enemy
+                    enemy.TakeDamage(attackDamage);
+                }
+            }
+            //    if (hit.transform.TryGetComponent<EnemyController>(out EnemyController T))
+            //{ T.TakeDamage(attackDamage); }
+        }
+    }
 
     void HitTarget(Vector3 pos)
     {
