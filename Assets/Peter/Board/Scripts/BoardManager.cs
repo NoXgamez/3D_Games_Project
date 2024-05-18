@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using Unity.AI.Navigation;
 
 public class BoardManager : MonoBehaviour
 {
@@ -143,7 +144,12 @@ public class BoardManager : MonoBehaviour
 		//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
 		LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
 
-		AddEnemy();
+        //Build navmesh before adding enemies
+        //GetComponent<NavMeshSurface>().BuildNavMesh();
+        // Removed as it added errors saying each object is readonly, and would run in the editor only
+		// This does mean that the enemies can walk trhough walls but will work in a build
+
+        AddEnemy();
 	}
 
 	private void AddEnemy()

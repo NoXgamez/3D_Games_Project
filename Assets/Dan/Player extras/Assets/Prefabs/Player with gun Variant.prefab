@@ -13,6 +13,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5597318372559880915}
     - target: {fileID: 481995042327841608, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
+      propertyPath: walkSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 481995042327841608, guid: 0630ddb66c43ce74b926a6ec5e0b0b3e, type: 3}
       propertyPath: attackLayer.m_Bits
       value: 8
       objectReference: {fileID: 0}

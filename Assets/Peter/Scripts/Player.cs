@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
         levelText.text = "LV " + level.ToString();
         healthText.text = "HP " + ((int)health).ToString() + "/" + maxHealth.ToString();
         expText.text = "XP " + ((int)exp).ToString() + "/" + ((int)expNeeded).ToString();
+        energyText.text = "ENERGY " + ((int)energy).ToString() + "/" + maxEnergy.ToString();
 
         if (exp >= expNeeded)
         {
@@ -52,7 +54,6 @@ public class Player : MonoBehaviour
         if (energy < maxEnergy)
         {
             energy += energyRegen * Time.deltaTime;
-            energyText.text = "ENERGY " + ((int)energy).ToString() + "/" + maxEnergy.ToString();
         }
     }
 
@@ -99,9 +100,33 @@ public class Player : MonoBehaviour
         GameUtilities.Save<Stats>(newStats, $"{Application.dataPath}/StatData.json");
     }
 
+    private void Reset()
+    {
+        Stats newStats = new Stats()
+        {
+            exp = 0,
+            level = 1,
+            expNeeded = 10,
+            upgradePoints = 0,
+            levelHealth = 1,
+            levelEnergy = 1,
+            levelEnergyRegen = 1,
+            maxHealth = 3,
+            maxEnergy = 5,
+            energyRegen = 1
+        };
+        GameUtilities.Save<Stats>(newStats, $"{Application.dataPath}/StatData.json");
+    }
+
     public void GetHit()
     {
         health -= 1f;
+
+        if (health <= 0f )
+        {
+            Reset();
+            SceneManager.LoadScene("MainMenuScene");
+        }
     }
 
     public void DrainEnergy()

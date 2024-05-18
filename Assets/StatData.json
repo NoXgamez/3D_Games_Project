@@ -1,0 +1,12 @@
+{
+    "exp": 0.0,
+    "level": 1.0,
+    "expNeeded": 10.0,
+    "upgradePoints": 0.0,
+    "levelHealth": 1.0,
+    "levelEnergy": 1.0,
+    "levelEnergyRegen": 1.0,
+    "maxHealth": 3.0,
+    "maxEnergy": 5.0,
+    "energyRegen": 1.0
+}

@@ -93,8 +93,14 @@ public class StatComponent : MonoBehaviour
         }
     }
 
+    public void QuitGame()
+    {
+        GameUtilities.Save<Stats>(Data, path);
+        Application.Quit();
+    }
+
     public void ChangeScene()
     {
-            SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("MainGameScene");
     }
 }
