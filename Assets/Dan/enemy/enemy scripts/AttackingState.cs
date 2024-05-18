@@ -62,5 +62,7 @@ public class AttackingState : BaseState
     public void Attack()
     {
         enemyController.AnimateAttack();
+        
     }
+
 }

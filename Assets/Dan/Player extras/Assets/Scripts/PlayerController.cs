@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
         attacking = false;
         readyToAttack = true;
     }
-
+   
     //RaycastHit raycastHit;
     //IInteractable currentInteractable;
     //[SerializeField] private LayerMask layerMask;

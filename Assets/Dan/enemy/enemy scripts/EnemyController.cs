@@ -179,7 +179,7 @@ public class EnemyController : BaseStateMachine
     public void ShouldIdle()
     {
         float DistanceToNode = Vector3.Distance(node.transform.position, transform.position);
-       float stoppingDistance = 1f; // Distance to stop from the player (adjust as needed)
+        float stoppingDistance = 1f; // Distance to stop from the player (adjust as needed)
         float moveDistance = Mathf.Max(DistanceToNode - stoppingDistance, 0); // Ensure moveDistance is not negative
 
         if (moveDistance<stoppingDistance&& !IsWithinAttackRange())
