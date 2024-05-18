@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -33,7 +34,7 @@ public class EnemyController : BaseStateMachine
     private NavMeshAgent agent;
     [HideInInspector] public UnityEvent DestinationReached;
     public Animator animator;
-    
+    public GameObject node;
     protected override void Awake()
     {
         States.Add((int)EnemyState.Idle, new IdleState());
@@ -45,7 +46,7 @@ public class EnemyController : BaseStateMachine
 
         animator = GetComponent<Animator>();
         // Create a node on start
-        GameObject node = Instantiate(nodePrefab, transform.position, Quaternion.identity);
+        node = Instantiate(nodePrefab, transform.position, Quaternion.identity);
         CurrentPathNode = node.GetComponent<PathNode>();
 
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -90,24 +91,19 @@ public class EnemyController : BaseStateMachine
     public void MoveTo(Vector3 position)
     {
         agent.SetDestination(position);
-        animator.SetBool("IsAttack", false);
-        animator.SetBool("IsChase", true);
-        animator.SetBool("IsIdle", false);
+      
+        AnimateChase();
     }
 
     public void MoveTo(GameObject target)
     {
         agent.SetDestination(target.transform.position);
-        animator.SetBool("IsAttack", false);
-        animator.SetBool("IsChase", true);
-        animator.SetBool("IsIdle", false);
+    
     }
 
     private bool HasReachedDestination()
     {
-        animator.SetBool("IsAttack", false);
-        animator.SetBool("IsChase", false);
-        animator.SetBool("IsIdle", true);
+        
         return agent.remainingDistance <= agent.stoppingDistance;
     }
 
@@ -161,5 +157,34 @@ public class EnemyController : BaseStateMachine
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, LoseDetectionRange);
+    }
+    public void AnimateChase() 
+    {
+        animator.SetBool("IsAttack", false);
+        animator.SetBool("IsChase", true);
+        animator.SetBool("IsIdle", false);
+    }
+    public void AnimateIdle()
+    {
+        animator.SetBool("IsAttack", false);
+        animator.SetBool("IsChase", false);
+        animator.SetBool("IsIdle", true);
+    }
+    public void AnimateAttack()
+    {
+        animator.SetBool("IsAttack", true);
+        animator.SetBool("IsChase", false);
+        animator.SetBool("IsIdle", false);
+    }
+    public void ShouldIdle()
+    {
+        float DistanceToNode = Vector3.Distance(node.transform.position, transform.position);
+       float stoppingDistance = 1f; // Distance to stop from the player (adjust as needed)
+        float moveDistance = Mathf.Max(DistanceToNode - stoppingDistance, 0); // Ensure moveDistance is not negative
+
+        if (moveDistance<stoppingDistance&& !IsWithinAttackRange())
+        {
+            AnimateIdle();
+        }
     }
 }

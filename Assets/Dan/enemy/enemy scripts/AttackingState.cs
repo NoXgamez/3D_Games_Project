@@ -61,8 +61,6 @@ public class AttackingState : BaseState
 
     public void Attack()
     {
-        enemyController.animator.SetBool("IsAttack", true);
-        enemyController.animator.SetBool("IsChase", false);
-        enemyController.animator.SetBool("IsIdle", false);
+        enemyController.AnimateAttack();
     }
 }

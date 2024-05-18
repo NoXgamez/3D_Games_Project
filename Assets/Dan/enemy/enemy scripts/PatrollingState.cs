@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class PatrollingState : BaseState
@@ -28,6 +29,11 @@ public class PatrollingState : BaseState
             enemyController.SetState((int)EnemyState.Following);
 
         }
+        else
+        {
+            enemyController.ShouldIdle();
+        }
+        
         base.Update();
     }
 
@@ -36,7 +42,7 @@ public class PatrollingState : BaseState
         enemyController.StopMoving();
         enemyController = null;
         currentNode = null;
-
+       
         base.Exit();
     }
 }
